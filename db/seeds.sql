@@ -1,7 +1,3 @@
-USE burgers_db;
-
-/*/Intital insert data/*/
-INSERT INTO burgers (burger_name) VALUES ('The Cadillac');
-INSERT INTO burgers (burger_name) VALUES ('The Shroom');
-INSERT INTO burgers (burger_name) VALUES ('Coronary Bypass');
-INSERT INTO burgers (burger_name) VALUES ('Too Matos');
+INSERT INTO burgers (burger_name, devoured) VALUES ('Cheese Burger', FALSE);
+INSERT INTO burgers (burger_name, devoured) VALUES ('Hamburger', FALSE);
+INSERT INTO burgers (burger_name, devoured) VALUES ('Pizza Burger', FALSE);
