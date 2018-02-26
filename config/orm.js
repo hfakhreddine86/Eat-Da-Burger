@@ -1,82 +1,34 @@
-var connection = require("./connection.js");
-
-// Helper function for SQL syntax.
-function printQuestionMarks(num) {
-  var arr = [];
-
-  for (var i = 0; i < num; i++) {
-    arr.push("?");
-  }
-
-  return arr.toString();
-}
-
-// Helper function for SQL syntax.
-function objToSql(ob) {
-  var arr = [];
-
-  for (var key in ob) {
-    if (Object.hasOwnProperty.call(ob, key)) {
-      arr.push(key + "=" + ob[key]);
-    }
-  }
-
-  return arr.toString();
-}
-
+var connection = require('./connection.js');
 
 var orm = {
-	selectAll: function(table, cb) {
-		var queryString = "SELECT * FROM ??";
-		connection.query(queryString, [table], function(err, result) {
-			if (err) { 
-				throw err; 
-			}
-			cb(result);
-		});
-	},
-	insertOne: function(table, cols, vals, cb) {
-		var queryString = "INSERT INTO " + table;
+  selectAll: function(tableName, cb) {
+  var queryString = 'SELECT * FROM ??;';
+  connection.query(queryString, [tableName], function(err, data) {
+    if (err) throw err;
+    cb(data);
+  });
+},
 
-		queryString += " (";
-		queryString += cols.toString();
-		queryString += ") ";
-		queryString += "VALUES (";
-		queryString += printQuestionMarks(vals.length);
-		queryString += ") ";
+  insertOne: function(tableName, column, value, cb) {
+  var queryString = 'INSERT INTO ?? (??) VALUES (?)';
+  console.log(queryString);
+  connection.query(queryString, [tableName, column, value] , function(err, data) {
+    if (err) throw err;
+    cb(data);
+  });
+},
 
-		console.log(queryString);
-
-		connection.query(queryString, vals, function(err, result) {
-			if (err) {
-				throw err;
-			}
-			cb(result);
-		});
-
-	},
-	updateOne: function(table, colVals, condition, cb) {
-		var queryString = "UPDATE " + table;
-
-		queryString += " SET ";
-		queryString += objToSql(colVals);
-		queryString += " WHERE ";
-		queryString += condition;
-
-		console.log(queryString);
-
-		connection.query(queryString, function(err, result) {
-			if (err) {
-				throw err;
-			}
-			cb(result);
-		});
-	}
-};
+update: function(table, id, devoured, cb) {
+  if (parseInt(devoured) === 0) {
+    var queryString = "UPDATE ?? SET devoured=true, count_eaten=count_eaten + 1 WHERE id=?";
+  } else {
+    queryString = "UPDATE ?? SET devoured=false WHERE id=?";
+  }
+  connection.query(queryString, [table, id], function(err, data) {
+    if (err) throw err;
+    cb(data);
+  });
+},
+}
 
 module.exports = orm;
-
-
-
-
-

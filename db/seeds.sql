@@ -1,8 +1,7 @@
-INSERT INTO burgers (burger_name)
-VALUES ("bacon cheeseburger");
+USE burgers_db;
 
-INSERT INTO burgers (burger_name)
-VALUES ("mushroom & swiss cheeseburger");
-
-INSERT INTO burgers (burger_name)
-VALUES ("chicken avocado burger");
+/*/Intital insert data/*/
+INSERT INTO burgers (burger_name) VALUES ('The Cadillac');
+INSERT INTO burgers (burger_name) VALUES ('The Shroom');
+INSERT INTO burgers (burger_name) VALUES ('Coronary Bypass');
+INSERT INTO burgers (burger_name) VALUES ('Too Matos');
