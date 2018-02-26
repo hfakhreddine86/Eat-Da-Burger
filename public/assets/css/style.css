@@ -1,11 +1,19 @@
 body {
   width: 99%;
   height: 900px;
-  background-color: #fc6;
+  background-image: url(../images/bg.jpeg);
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.jumbotron {
+  opacity: .8;
+  background: blue;
 }
 
 #top-bar {
   margin-top: 28px;
+  color: #f30;
 }
 
 .spacing-reset {
@@ -65,4 +73,10 @@ body {
 
 h1 {
   color: #f30;
+}
+
+#submit {
+  color: white;
+  font-weight: bolder;
+  font-size: 30px;
 }
